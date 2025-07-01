@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -101,7 +102,16 @@ public class PracticeFormPage {
 
     public PracticeFormPage submitForm() {
         submitButton.click();
+        return this;
+    }
+
+    public PracticeFormPage checkModalIsOpen() {
         modalHeader.shouldHave(text("Thanks for submitting the form"));
+        return this;
+    }
+
+    public PracticeFormPage checkModalIsNotOpen() {
+        modalHeader.shouldNotBe(visible);
         return this;
     }
 
@@ -110,9 +120,14 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage closeForm() {
+    public PracticeFormPage closeModal() {
         closeButton.click();
         header.shouldHave(text("Practice Form"));
+        return this;
+    }
+
+    public PracticeFormPage checkValidation() {
+        $(".was-validated").shouldBe(visible);
         return this;
     }
 }
