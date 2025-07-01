@@ -1,33 +1,19 @@
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.TextBoxPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
-
-public class TextBoxTests {
-    @BeforeAll()
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.pageLoadStrategy = "eager";
-
-    }
-
+public class TextBoxTests extends TestBase {
+    TextBoxPage textBoxPage = new TextBoxPage();
     @Test
     void fillFormTest() {
-        open("/text-box");
-        $("#userName").setValue("Alex");
-        $("#userEmail").setValue("alex@ya.ru");
-        $("#currentAddress").setValue("Moscow");
-        $("#permanentAddress").setValue("Kazan");
-        $("#submit").click();
-
-        $("#output #name").shouldHave(text("Alex"));
-        $("#output #email").shouldHave(text("alex@ya.ru"));
-        $("#output #currentAddress").shouldHave(text("Moscow"));
-        $("#output #permanentAddress").shouldHave(text("Kazan"));
-
+        textBoxPage.openPage()
+                    .setUserName("Alex")
+                    .setUserEmail("alex@ya.ru")
+                    .setUserCurrentAddress("Moscow")
+                    .setUserPermanentAddress("Kazan")
+                    .submitForm()
+                    .checkResult("name", "Alex")
+                    .checkResult("email", "alex@ya.ru")
+                    .checkResult("currentAddress", "Moscow")
+                    .checkResult("permanentAddress", "Kazan");
     }
 }

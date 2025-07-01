@@ -33,6 +33,7 @@ public class PracticeFormPage {
         open("/automation-practice-form");
         header.shouldHave(text("Practice Form"));
         executeJavaScript("$('footer').remove();");
+        executeJavaScript("$('#fixedban').remove();");
         return this;
     }
 
