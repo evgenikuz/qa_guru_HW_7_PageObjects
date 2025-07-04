@@ -22,16 +22,17 @@ public class PracticeFormPage {
             currentAddress = $("#currentAddress"),
             stateInput = $("#state .css-1wy0on6"),
             cityInput = $("#city .css-1wy0on6"),
-            submitButton = $("#submit"),
-            modalHeader = $(".modal-content #example-modal-sizes-title-lg"),
-            resultsTable = $(".table-responsive"),
-            closeButton = $("#closeLargeModal");
+            submitButton = $("#submit");
 
     CalendarComponent calendarComponent = new CalendarComponent();
 
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
         header.shouldHave(text("Practice Form"));
+        return this;
+    }
+
+    public  PracticeFormPage deleteAds() {
         executeJavaScript("$('footer').remove();");
         executeJavaScript("$('#fixedban').remove();");
         return this;
@@ -106,26 +107,7 @@ public class PracticeFormPage {
         return this;
     }
 
-    public PracticeFormPage checkModalIsOpen() {
-        modalHeader.shouldHave(text("Thanks for submitting the form"));
-        return this;
-    }
 
-    public PracticeFormPage checkModalIsNotOpen() {
-        modalHeader.shouldNotBe(visible);
-        return this;
-    }
-
-    public PracticeFormPage checkResult(String key, String value) {
-        resultsTable.$(byText(key)).parent().shouldHave(text(value));
-        return this;
-    }
-
-    public PracticeFormPage closeModal() {
-        closeButton.click();
-        header.shouldHave(text("Practice Form"));
-        return this;
-    }
 
     public PracticeFormPage checkValidation() {
         $(".was-validated").shouldBe(visible);
