@@ -1,8 +1,6 @@
 package pages.components;
 
-import com.codeborne.selenide.Modal;
 import com.codeborne.selenide.SelenideElement;
-import pages.PracticeFormPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
